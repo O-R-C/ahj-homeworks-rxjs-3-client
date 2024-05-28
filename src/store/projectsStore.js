@@ -1,22 +1,22 @@
-import { postsReducer } from '@/reducers/postsReducer'
+import { projectsReducer } from '@/reducers/projectsReducer'
 import { Subject, scan, share, startWith } from 'rxjs'
 import { map } from 'rxjs/operators'
 
 /**
- * Class representing a posts store.
+ * Class representing a projects store.
  *
  * @class
  * @property {Subject} actions$ - the actions subject.
  * @property {Observable} state$ - the state observable.
  */
-export default class postsStore {
+export default class projectsStore {
   constructor() {
     this.actions$ = new Subject()
     this.state$ = this.actions$.asObservable().pipe(
       startWith({
         type: 'INIT',
       }),
-      scan((state, action) => postsReducer(state, action), { posts: [] }),
+      scan((state, action) => projectsReducer(state, action), { projects: {} }),
       share(),
     )
   }
@@ -34,9 +34,9 @@ export default class postsStore {
    *
    * @return {Observable<Array>} An observable that emits the posts array from the state object.
    */
-  get posts$() {
-    return this.state$.pipe(map((state) => state.posts))
+  get projects$() {
+    return this.state$.pipe(map((state) => state.projects))
   }
 }
 
-export const postsStoreInstance = new postsStore()
+export const projectsStoreInstance = new projectsStore()
