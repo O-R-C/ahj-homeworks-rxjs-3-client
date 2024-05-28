@@ -1,0 +1,23 @@
+@value values: '@/css/variables.module.css';
+@value colorMain, colorSecondary, padding, radius, border, shadow from values;
+
+.widget {
+  padding: padding;
+}
+
+.title {
+  color: colorMain;
+}
+
+.content {
+  border-radius: radius;
+  border: border;
+}
+
+.headers {
+  width: 100%;
+}
+
+.items {
+  width: 100%;
+}

@@ -1,7 +1,7 @@
 @value colorMain: #1079ba;
 @value colorSecondary: #ccc;
 
-@value padding: 10px;
+@value padding: 20px;
 
 @value radius: 20px;
 @value border: 2px solid colorSecondary;

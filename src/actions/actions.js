@@ -1,6 +1,6 @@
-import { SET_POSTS } from './actionTypes'
+import { SET_TASK } from './actionTypes'
 
-export const postsSet = (messages) => ({
-  type: SET_POSTS,
-  payload: messages,
+export const taskSet = ({ project, tasks }) => ({
+  type: SET_TASK,
+  payload: { project, tasks },
 })

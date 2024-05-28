@@ -1,0 +1,21 @@
+@value values: '@/css/variables.module.css';
+@value colorMain, colorSecondary, padding, radius, border, shadow from values;
+
+.stats-row {
+  padding: padding;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stats-row > *:first-child {
+  text-align: left;
+}
+
+.stats-row > *:last-child {
+  flex: 0 0 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
