@@ -22,6 +22,9 @@
       ],
       "@ui/*": [
         "./src/components/ui/*"
+      ],
+      "@store/*": [
+        "./src/store/*"
       ]
     }
   }
