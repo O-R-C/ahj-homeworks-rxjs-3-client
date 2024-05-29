@@ -22,10 +22,11 @@ export default class Stats {
    * Constructor.
    * @param {HTMLElement} element - App element.
    * @param {Object} store - Projects store.
+   * @throws {Error} Store is not provided
    */
   constructor(element, store) {
     if (!store) {
-      console.error('Store is not provided')
+      throw new Error('Store is not provided')
     }
 
     this.#store = store

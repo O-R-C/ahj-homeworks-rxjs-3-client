@@ -3,6 +3,8 @@
 
 .widget {
   padding: padding;
+
+  flex: 1;
 }
 
 .title {

@@ -1,0 +1,15 @@
+@value values: '@/css/variables.module.css';
+@value colorMain, colorSecondary, padding, radius, border, shadow from values;
+
+.headers {
+  padding: padding;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.project-list {
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -1,0 +1,53 @@
+@value values: '@/css/variables.module.css';
+@value colorMain, colorSecondary, padding, radius, border, shadow from values;
+
+.tasks-row {
+  display: flex;
+  align-items: center;
+  padding: padding;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+  & * {
+    cursor: pointer;
+  }
+}
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+}
+
+.checkbox-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+  border-radius: radius;
+  border: border;
+  background-color: colorSecondary;
+  margin-right: 10px;
+
+  transition: background-color 0.2s ease-in-out;
+}
+
+.checkbox-mark::after {
+  content: '';
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: radius;
+  background-color: colorSecondary;
+}
+
+.checkbox:checked + .checkbox-mark::after {
+  background-color: colorMain;
+}
