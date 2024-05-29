@@ -76,7 +76,7 @@ export default class Stats_UI extends BaseUI {
     this.#clear()
 
     Object.keys(projects).forEach((project) => {
-      const countOpen = projects[project].filter((task) => task.status === 'open').length
+      const countOpen = projects[project].filter((task) => task.status === 'open').length || '0'
       const row = StatsRow(
         getElement({ tag: 'div', textContent: project }),
         getElement({ tag: 'div', textContent: countOpen, classes: styles['count-open'] }),

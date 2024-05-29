@@ -40,11 +40,10 @@ export default class Tasks_UI extends BaseUI {
   }
 
   renderTasks(tasks) {
-    console.log('🚀 ~ tasks:', tasks)
     this.#clearItems()
 
     tasks.forEach((task) => {
-      const row = TasksRow(task.title)
+      const row = TasksRow(task)
       this.items.append(row)
     })
   }

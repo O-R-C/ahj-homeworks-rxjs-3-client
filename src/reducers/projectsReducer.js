@@ -1,4 +1,4 @@
-import { SET_TASK } from '../actions/actionTypes'
+import { SET_TASK, TOGGLE_TASK } from '../actions/actionTypes'
 
 const initialState = {
   projects: {},
@@ -19,6 +19,22 @@ export const projectsReducer = (state = initialState, action) => {
         projects: {
           ...state.projects,
           [action.payload.project]: action.payload.tasks,
+        },
+      }
+    case TOGGLE_TASK:
+      return {
+        ...state,
+        projects: {
+          ...state.projects,
+          [action.payload.project]: state.projects[action.payload.project].map((task) => {
+            if (task.id === action.payload.id) {
+              return {
+                ...task,
+                status: task.status === 'open' ? 'closed' : 'open',
+              }
+            }
+            return task
+          }),
         },
       }
     default:
