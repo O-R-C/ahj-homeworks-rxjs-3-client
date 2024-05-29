@@ -1,6 +1,12 @@
 import getElement from '@/js/getElement'
 import styles from './Widget.module.css'
 
+/**
+ * Creates a widget component with a title and content.
+ *
+ * @param {string} title - The title of the widget.
+ * @return {HTMLElement} - The created widget element.
+ */
 export const Widget = (title) => {
   const widget = getElement({ tag: 'div', classes: styles['widget'] })
   const titleElement = getElement({ tag: 'h3', classes: styles['title'], textContent: title })

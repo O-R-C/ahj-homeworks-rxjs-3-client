@@ -30,9 +30,9 @@ export default class projectsStore {
   dispatch = (action, payload = null) => this.actions$.next({ type: action, payload })
 
   /**
-   * Returns an observable that emits the posts array from the state object.
+   * Returns an observable that emits the projects array from the state object.
    *
-   * @return {Observable<Array>} An observable that emits the posts array from the state object.
+   * @return {Observable<Array>} An observable that emits the projects array from the state object.
    */
   get projects$() {
     return this.state$.pipe(map((state) => state.projects))
