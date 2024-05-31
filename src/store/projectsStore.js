@@ -44,7 +44,9 @@ export default class projectsStore {
    * @return {Observable<string>} An observable that emits the current project from the state object.
    */
   get currentProject$() {
-    return this.state$.pipe(map((state) => state.currentProject))
+    return this.state$.pipe(
+      map((state) => ({ currentProject: state.currentProject, tasks: state.projects[state.currentProject] })),
+    )
   }
 }
 

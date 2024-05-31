@@ -22,14 +22,12 @@ export default class Tasks {
   }
 
   #subscribes() {
-    this.#store.currentProject$.subscribe((project) => {
-      if (!project) return
+    this.#store.currentProject$.subscribe(({ currentProject, tasks }) => {
+      if (!currentProject) return
 
-      this.#ui.renderHeaders(project)
+      this.#ui.renderHeaders(currentProject)
 
-      this.#store.projects$.subscribe((projects) => {
-        this.#ui.renderTasks(projects[project])
-      })
+      this.#ui.renderTasks(tasks)
     })
   }
 

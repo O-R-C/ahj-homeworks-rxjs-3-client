@@ -18,3 +18,5 @@ Object.keys(data).forEach((key) => {
     tasks: data[key],
   })
 })
+
+projectsStoreInstance.dispatch(SET_CURRENT_PROJECT, Object.keys(data)[1])
