@@ -16,7 +16,7 @@ export default class projectsStore {
       startWith({
         type: 'INIT',
       }),
-      scan((state, action) => projectsReducer(state, action), { projects: {} }),
+      scan((state, action) => projectsReducer(state, action), { projects: {}, currentProject: null }),
       share(),
     )
   }
@@ -36,6 +36,15 @@ export default class projectsStore {
    */
   get projects$() {
     return this.state$.pipe(map((state) => state.projects))
+  }
+
+  /**
+   * Returns an observable that emits the current project from the state object.
+   *
+   * @return {Observable<string>} An observable that emits the current project from the state object.
+   */
+  get currentProject$() {
+    return this.state$.pipe(map((state) => state.currentProject))
   }
 }
 

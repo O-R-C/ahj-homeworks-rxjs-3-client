@@ -4,7 +4,6 @@ import { TOGGLE_TASK } from '@/actions/actionTypes'
 export default class Tasks {
   #ui
   #store
-  #currentProject = null
 
   constructor(element, store) {
     if (!store) {
@@ -23,23 +22,33 @@ export default class Tasks {
   }
 
   #subscribes() {
-    this.#store.projects$.subscribe((projects) => {
-      const alphabetFirstProject = Object.keys(projects).sort((a, b) => a.localeCompare(b))[0]
-      this.#currentProject = alphabetFirstProject
-      this.#ui.renderHeaders(alphabetFirstProject)
+    this.#store.currentProject$.subscribe((project) => {
+      if (!project) return
 
-      this.#ui.renderTasks(projects[alphabetFirstProject])
+      this.#ui.renderHeaders(project)
+
+      this.#store.projects$.subscribe((projects) => {
+        this.#ui.renderTasks(projects[project])
+      })
     })
   }
 
   #addListeners() {
-    this.#ui.items.addEventListener('click', (event) => {
-      const checkbox = event.target.closest('input[type=checkbox]')
+    this.#ui.items.addEventListener('click', this.#handleItemsClick)
+    this.#ui.headers.addEventListener('click', this.#handleHeadersClick)
+  }
 
-      if (!checkbox) return
+  #handleItemsClick = (e) => {
+    const checkbox = e.target.closest('input[type=checkbox]')
 
-      const id = checkbox.dataset.id
-      this.#store.dispatch(TOGGLE_TASK, { project: this.#currentProject, id })
-    })
+    if (!checkbox) return
+
+    this.#store.dispatch(TOGGLE_TASK, checkbox.dataset.id)
+  }
+
+  #handleHeadersClick = (e) => {
+    const projectsList = e.target.closest('div[class^=project-list]')
+
+    if (!projectsList) return
   }
 }
