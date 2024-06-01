@@ -1,10 +1,22 @@
 import Tasks_UI from './Tasks_UI'
 import { TOGGLE_TASK, SET_CURRENT_PROJECT } from '@/actions/actionTypes'
 
+/**
+ * Tasks component class.
+ *
+ * @class
+ * @extends {BaseUI}
+ */
 export default class Tasks {
   #ui
   #store
 
+  /**
+   * Constructor for the Tasks class.
+   *
+   * @param {HTMLElement} element - The HTML element to attach the UI to.
+   * @param {Store} store - The store of the application.
+   */
   constructor(element, store) {
     if (!store) {
       throw new Error('Store is not provided')
@@ -16,11 +28,17 @@ export default class Tasks {
     this.#init()
   }
 
+  /**
+   * Initializes the component.
+   */
   #init() {
     this.#subscribes()
     this.#addListeners()
   }
 
+  /**
+   * Subscribes to the store.
+   */
   #subscribes() {
     this.#store.currentProject$.subscribe(({ currentProject, tasks }) => {
       if (!currentProject || !tasks) return
@@ -35,12 +53,20 @@ export default class Tasks {
     })
   }
 
+  /**
+   * Adds listeners to the UI elements.
+   */
   #addListeners() {
     this.#ui.items.addEventListener('click', this.#handleItemsClick)
     this.#ui.headers.addEventListener('click', this.#handleHeadersClick)
     this.#ui.projectsList.addEventListener('click', this.#handleProjectClick)
   }
 
+  /**
+   * Handles clicks on the items list.
+   *
+   * @param {MouseEvent} e - The event object.
+   */
   #handleItemsClick = (e) => {
     const checkbox = e.target.closest('input[type=checkbox]')
 
@@ -49,6 +75,11 @@ export default class Tasks {
     this.#store.dispatch(TOGGLE_TASK, checkbox.dataset.id)
   }
 
+  /**
+   * Handles clicks on the headers section.
+   *
+   * @param {MouseEvent} e - The event object.
+   */
   #handleHeadersClick = (e) => {
     const link = e.target.closest('span[class^=current-project]')
 
@@ -57,6 +88,11 @@ export default class Tasks {
     this.#ui.toggleProjectsList()
   }
 
+  /**
+   * Handles clicks on the projects list.
+   *
+   * @param {MouseEvent} e - The event object.
+   */
   #handleProjectClick = (e) => {
     const link = e.target.closest('span[class^=project-list-item]')
 

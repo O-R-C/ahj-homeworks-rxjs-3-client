@@ -1,6 +1,12 @@
 import getElement from '@/js/getElement'
 import styles from './TasksRow.module.css'
 
+/**
+ * Creates a task row.
+ *
+ * @param {object} task - The task object.
+ * @returns {HTMLElement} - The created task row.
+ */
 export const TasksRow = (task) => {
   const row = getElement({ tag: 'div', classes: styles['tasks-row'] })
   const checkboxWrapper = getElement({ tag: 'label', classes: styles['checkbox-wrapper'] })
