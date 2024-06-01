@@ -1,5 +1,5 @@
 import Tasks_UI from './Tasks_UI'
-import { TOGGLE_TASK } from '@/actions/actionTypes'
+import { TOGGLE_TASK, SET_CURRENT_PROJECT } from '@/actions/actionTypes'
 
 export default class Tasks {
   #ui
@@ -23,17 +23,22 @@ export default class Tasks {
 
   #subscribes() {
     this.#store.currentProject$.subscribe(({ currentProject, tasks }) => {
-      if (!currentProject) return
+      if (!currentProject || !tasks) return
 
       this.#ui.renderHeaders(currentProject)
 
       this.#ui.renderTasks(tasks)
+    })
+
+    this.#store.projects$.subscribe((projects) => {
+      this.#ui.renderProjectsList(Object.keys(projects))
     })
   }
 
   #addListeners() {
     this.#ui.items.addEventListener('click', this.#handleItemsClick)
     this.#ui.headers.addEventListener('click', this.#handleHeadersClick)
+    this.#ui.projectsList.addEventListener('click', this.#handleProjectClick)
   }
 
   #handleItemsClick = (e) => {
@@ -45,8 +50,20 @@ export default class Tasks {
   }
 
   #handleHeadersClick = (e) => {
-    const projectsList = e.target.closest('div[class^=project-list]')
+    const link = e.target.closest('span[class^=current-project]')
 
-    if (!projectsList) return
+    if (!link) return
+
+    this.#ui.toggleProjectsList()
+  }
+
+  #handleProjectClick = (e) => {
+    const link = e.target.closest('span[class^=project-list-item]')
+
+    if (!link) return
+
+    this.#store.dispatch(SET_CURRENT_PROJECT, link.textContent)
+
+    this.#ui.toggleProjectsList()
   }
 }

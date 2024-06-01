@@ -13,11 +13,21 @@ export default class Tasks_UI extends BaseUI {
 
   #init() {
     this.#addElements()
+    this.#createHeaders()
   }
 
   #addElements() {
-    this.headers = this.app.querySelector(`div[class^=headers]`)
+    this.widgetHeaders = this.app.querySelector(`div[class^=headers]`)
     this.items = this.app.querySelector(`div[class^=items]`)
+  }
+
+  #createHeaders() {
+    this.headers = getElement({ tag: 'div', classes: styles['headers'] })
+    this.projectsList = getElement({ tag: 'div', classes: styles['project-list'] })
+    this.currentProject = getElement({ tag: 'span', classes: styles['current-project'] })
+
+    this.headers.append(this.projectsList, this.currentProject)
+    this.widgetHeaders.append(this.headers)
   }
 
   createApp() {
@@ -26,17 +36,13 @@ export default class Tasks_UI extends BaseUI {
   }
 
   renderHeaders(currentProject) {
-    this.clearHeaders()
+    this.#clearCurrentProject()
 
-    const headers = getElement({ tag: 'div', classes: styles['headers'], textContent: 'Project:' })
-    const link = getElement({ tag: 'span', classes: styles['project-list'], textContent: currentProject })
-
-    headers.append(link)
-    this.headers.append(headers)
+    this.currentProject.textContent = currentProject
   }
 
-  clearHeaders() {
-    this.headers.innerHTML = ''
+  #clearCurrentProject() {
+    this.currentProject.textContent = ''
   }
 
   renderTasks(tasks) {
@@ -50,5 +56,22 @@ export default class Tasks_UI extends BaseUI {
 
   #clearItems() {
     this.items.innerHTML = ''
+  }
+
+  renderProjectsList(projects) {
+    this.#clearProjectsList()
+
+    projects.forEach((project) => {
+      const link = getElement({ tag: 'span', classes: styles['project-list-item'], textContent: project })
+      this.projectsList.append(link)
+    })
+  }
+
+  #clearProjectsList() {
+    this.projectsList.innerHTML = ''
+  }
+
+  toggleProjectsList() {
+    this.projectsList.classList.toggle(styles['active'])
   }
 }

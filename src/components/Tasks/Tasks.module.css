@@ -7,9 +7,56 @@
   display: flex;
   align-items: center;
   gap: 5px;
+
+  position: relative;
+}
+
+.headers::before {
+  content: 'Project: ';
+}
+
+.current-project {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .project-list {
-  text-decoration: underline;
+  display: none;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+
+  flex-direction: column;
+  align-items: start;
+  gap: 5px;
+  padding: padding;
+  padding-left: 90px;
+
+  border-radius: radius;
+  background-color: white;
+
+  &::before {
+    content: 'Projects: ';
+
+    display: block;
+    padding: padding;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    z-index: -1;
+  }
+}
+
+.active {
+  display: flex;
+}
+
+.project-list-item {
   cursor: pointer;
 }

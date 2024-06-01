@@ -10,8 +10,6 @@ setTitle('Project Management Dashboard')
 new Stats('body', projectsStoreInstance)
 new Tasks('body', projectsStoreInstance)
 
-projectsStoreInstance.dispatch(SET_CURRENT_PROJECT, Object.keys(data)[0])
-
 Object.keys(data).forEach((key) => {
   projectsStoreInstance.dispatch(SET_TASK, {
     project: key,
@@ -19,4 +17,4 @@ Object.keys(data).forEach((key) => {
   })
 })
 
-projectsStoreInstance.dispatch(SET_CURRENT_PROJECT, Object.keys(data)[1])
+projectsStoreInstance.dispatch(SET_CURRENT_PROJECT, Object.keys(data)[0])
