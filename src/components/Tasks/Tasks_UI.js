@@ -4,7 +4,17 @@ import Widget from '@ui/Widget/Widget'
 import TasksRow from '@ui/TasksRow/TasksRow'
 import styles from './Tasks.module.css'
 
+/**
+ * Tasks UI component class.
+ *
+ * @class
+ */
 export default class Tasks_UI extends BaseUI {
+  /**
+   * Constructor for the Tasks_UI class.
+   *
+   * @param {HTMLElement} element - The HTML element to attach the UI to.
+   */
   constructor(element) {
     super(element)
 
@@ -30,11 +40,21 @@ export default class Tasks_UI extends BaseUI {
     this.widgetHeaders.append(this.headers)
   }
 
+  /**
+   * Creates the main application component.
+   *
+   * @returns {HTMLElement} The created application component.
+   */
   createApp() {
     const app = Widget('Tasks')
     return app
   }
 
+  /**
+   * Renders the headers section of the application.
+   *
+   * @param {string} currentProject - The name of the current project.
+   */
   renderHeaders(currentProject) {
     this.#clearCurrentProject()
 
@@ -45,6 +65,11 @@ export default class Tasks_UI extends BaseUI {
     this.currentProject.textContent = ''
   }
 
+  /**
+   * Renders the tasks list section of the application.
+   *
+   * @param {Object} tasks - The tasks data.
+   */
   renderTasks(tasks) {
     this.#clearItems()
 
@@ -58,6 +83,11 @@ export default class Tasks_UI extends BaseUI {
     this.items.innerHTML = ''
   }
 
+  /**
+   * Renders the projects list section of the application.
+   *
+   * @param {Object} projects - The projects data.
+   */
   renderProjectsList(projects) {
     this.#clearProjectsList()
 
@@ -71,6 +101,9 @@ export default class Tasks_UI extends BaseUI {
     this.projectsList.innerHTML = ''
   }
 
+  /**
+   * Toggles the visibility of the projects list.
+   */
   toggleProjectsList() {
     this.projectsList.classList.toggle(styles['active'])
   }
