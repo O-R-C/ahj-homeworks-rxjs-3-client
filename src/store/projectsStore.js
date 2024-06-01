@@ -1,6 +1,7 @@
 import { projectsReducer } from '@/reducers/projectsReducer'
 import { Subject, scan, share, startWith } from 'rxjs'
 import { map } from 'rxjs/operators'
+import data from '@/js/data'
 
 /**
  * Class representing a projects store.
@@ -16,7 +17,7 @@ export default class projectsStore {
       startWith({
         type: 'INIT',
       }),
-      scan((state, action) => projectsReducer(state, action), { projects: {}, currentProject: null }),
+      scan((state, action) => projectsReducer(state, action), { projects: data, currentProject: Object.keys(data)[0] }),
       share(),
     )
   }

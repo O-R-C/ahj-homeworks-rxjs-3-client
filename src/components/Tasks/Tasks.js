@@ -34,6 +34,8 @@ export default class Tasks {
   #init() {
     this.#subscribes()
     this.#addListeners()
+
+    this.#store.dispatch('INIT_PROJECTS')
   }
 
   /**
